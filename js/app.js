@@ -45,11 +45,16 @@ var Calculadora = {
 	formatNumber  : function(n) {
 		var pos = 8;
 		var num = parseFloat(n).toFixed(7);
+		var str = '' + num;
 		if (num<0.0000001 && num>-0.0000001) { return 0; }
 		else {
-			if(('' + num).indexOf('.')>=0) { pos++; }
-			if (('' + num).length<=pos)     { return ('' + num); }
-			else                           { return parseFloat(('' + num).substr(0,pos)); }
+			if(str.indexOf('.')>=0&&str.indexOf('.')<8) { pos++; }
+			
+			if (str.length<=pos) {
+				while(str[str.length-1] == '0') { str = str.substr(0,str.length-1); }
+				return str; 
+			}
+			else { return parseFloat(('' + num).substr(0,pos)); }
 			
 		}
 	},
